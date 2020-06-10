@@ -1,9 +1,6 @@
 package com.lambdaschool.orders.models;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 public class Payment
 {
@@ -12,4 +9,7 @@ public class Payment
    private long paymentid;
    @Column(nullable = false, unique = true)
    private String type;
+
+   @ManyToMany
+   @JoinTable
 }

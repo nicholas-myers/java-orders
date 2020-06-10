@@ -1,6 +1,8 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -20,5 +22,5 @@ public class Order
    private Customer customer;
 
    @ManyToMany
-   @JoinTable
+   List<Payment> orderpayments = new ArrayList<>();
 }
