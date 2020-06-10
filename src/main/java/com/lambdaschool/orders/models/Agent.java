@@ -24,4 +24,5 @@ public class Agent
    cascade = CascadeType.ALL,
    orphanRemoval = true)
    List<Customer> customers = new ArrayList<>();
+
 }
