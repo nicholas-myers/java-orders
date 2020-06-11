@@ -20,9 +20,9 @@ public class CustomerController
 
    @GetMapping(value = "/customers",
    produces = {"application/json"})
-   public ResponseEntity<?> listAllRestaurants()
+   public ResponseEntity<?> listAllCustomers()
    {
       List<Customer> allCustomers = customerService.findAllCustomers();
-      (allCustomers, HttpStatus.OK);
+      return new ResponseEntity<>(allCustomers, HttpStatus.OK);
    }
 }

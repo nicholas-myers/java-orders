@@ -38,7 +38,7 @@ public class CustomerServiceImp implements CustomerService
    @Override
    public List<Customer> findCustomerByNameLike(String customername)
    {
-      ArrayList<Customer> list = custrepos.findByNameContainingIgnoringCase(customername);
+      ArrayList<Customer> list = custrepos.findByCustnameContainingIgnoringCase(customername);
       return list;
    }
 }
