@@ -1,5 +1,7 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +29,21 @@ public class Customer
 
    @ManyToOne
    @JoinColumn(name = "agentcode", nullable = false)
+   @JsonIgnoreProperties(value = "customers")
    private Agent agent;
 
    @OneToMany(mappedBy = "customer",
    cascade = CascadeType.ALL,
    orphanRemoval = true)
+           @JsonIgnoreProperties({"orders"})
    List<Order> orders = new ArrayList<>();
 
 
    public Customer() {
    }
 
-   public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
+   public Customer(long custcode, String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent, List<Order> orders) {
+      this.custcode = custcode;
       this.custname = custname;
       this.custcity = custcity;
       this.workingarea = workingarea;
@@ -50,6 +55,7 @@ public class Customer
       this.outstandingamt = outstandingamt;
       this.phone = phone;
       this.agent = agent;
+      this.orders = orders;
    }
 
    public long getCustcode() {
@@ -148,6 +154,14 @@ public class Customer
       this.agent = agent;
    }
 
+   public List<Order> getOrders() {
+      return orders;
+   }
+
+   public void setOrders(List<Order> orders) {
+      this.orders = orders;
+   }
+
    @Override
    public String toString() {
       return "Customer{" +
@@ -163,6 +177,7 @@ public class Customer
               ", outstandingamt=" + outstandingamt +
               ", phone='" + phone + '\'' +
               ", agent=" + agent +
+              ", orders=" + orders +
               '}';
    }
 }

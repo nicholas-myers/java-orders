@@ -1,13 +1,14 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "agents")
-public class Agent
-{
+public class Agent {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private long agentcode;
@@ -20,19 +21,22 @@ public class Agent
    private String country;
 
    @OneToMany(mappedBy = "agent",
-   cascade = CascadeType.ALL,
-   orphanRemoval = true)
+           cascade = CascadeType.ALL,
+           orphanRemoval = true)
+   @JsonIgnoreProperties(value = "agent")
    List<Customer> customers = new ArrayList<>();
 
    public Agent() {
    }
 
-   public Agent(String agentname, String workingarea, double commission, String phone, String country) {
+   public Agent(long agentcode, String agentname, String workingarea, double commission, String phone, String country, List<Customer> customers) {
+      this.agentcode = agentcode;
       this.agentname = agentname;
       this.workingarea = workingarea;
       this.commission = commission;
       this.phone = phone;
       this.country = country;
+      this.customers = customers;
    }
 
    public long getAgentcode() {
@@ -83,6 +87,14 @@ public class Agent
       this.country = country;
    }
 
+   public List<Customer> getCustomers() {
+      return customers;
+   }
+
+   public void setCustomers(List<Customer> customers) {
+      this.customers = customers;
+   }
+
    @Override
    public String toString() {
       return "Agent{" +
@@ -90,8 +102,9 @@ public class Agent
               ", agentname='" + agentname + '\'' +
               ", workingarea='" + workingarea + '\'' +
               ", commission=" + commission +
-              ", phone=" + phone +
+              ", phone='" + phone + '\'' +
               ", country='" + country + '\'' +
+              ", customers=" + customers +
               '}';
    }
 }

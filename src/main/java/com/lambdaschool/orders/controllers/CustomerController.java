@@ -17,7 +17,7 @@ public class CustomerController {
    private CustomerService customerService;
 
 
-   @GetMapping(value = "/customers",
+   @GetMapping(value = "/customers/orders",
            produces = {"application/json"})
    public ResponseEntity<?> listAllCustomers() {
       List<Customer> allCustomers = customerService.findAllCustomers();
