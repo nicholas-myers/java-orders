@@ -20,4 +20,31 @@ public class Payment
    @ManyToMany(mappedBy = "payments")
    @JsonIgnoreProperties(value = "payments")
    List<Order> orders = new ArrayList<>();
+
+   public Payment() {
+   }
+
+   public long getPaymentid() {
+      return paymentid;
+   }
+
+   public void setPaymentid(long paymentid) {
+      this.paymentid = paymentid;
+   }
+
+   public String getType() {
+      return type;
+   }
+
+   public void setType(String type) {
+      this.type = type;
+   }
+
+   @Override
+   public String toString() {
+      return "Payment{" +
+              "paymentid=" + paymentid +
+              ", type='" + type + '\'' +
+              '}';
+   }
 }

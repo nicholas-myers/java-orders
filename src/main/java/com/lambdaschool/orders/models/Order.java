@@ -15,35 +15,29 @@ public class Order
    @Column(nullable = false)
    private double ordamount;
    private double advanceamount;
-   private String orderdescription;
-
-   @ManyToMany
-   @JoinTable(name = "orderpayments",
-   joinColumns = @JoinColumn(name = "ordnum"),
-   inverseJoinColumns = @JoinColumn(name = "paymentid"))
-   private List<Payment> payments = new ArrayList<>();
 
    @ManyToOne
    @JoinColumn(name = "custcode", nullable = false)
    private Customer customer;
 
+   private String orderdescription;
+
+   @ManyToMany
+   @JoinTable(name = "orderspayments",
+   joinColumns = @JoinColumn(name = "ordnum"),
+   inverseJoinColumns = @JoinColumn(name = "paymentid"))
+   private List<Payment> payments = new ArrayList<>();
+
+
+
    public Order() {
    }
 
-   public Order(double ordamount, double advanceamount, String orderdescription, List<Payment> payments, Customer customer) {
+   public Order(double ordamount, double advanceamount, Customer customer, String orderdescription) {
       this.ordamount = ordamount;
       this.advanceamount = advanceamount;
-      this.orderdescription = orderdescription;
-      this.payments = payments;
       this.customer = customer;
-   }
-
-   public long getOrdnum() {
-      return ordnum;
-   }
-
-   public void setOrdnum(long ordnum) {
-      this.ordnum = ordnum;
+      this.orderdescription = orderdescription;
    }
 
    public double getOrdamount() {
@@ -62,22 +56,6 @@ public class Order
       this.advanceamount = advanceamount;
    }
 
-   public String getOrderdescription() {
-      return orderdescription;
-   }
-
-   public void setOrderdescription(String orderdescription) {
-      this.orderdescription = orderdescription;
-   }
-
-   public List<Payment> getPayments() {
-      return payments;
-   }
-
-   public void setPayments(List<Payment> payments) {
-      this.payments = payments;
-   }
-
    public Customer getCustomer() {
       return customer;
    }
@@ -86,15 +64,23 @@ public class Order
       this.customer = customer;
    }
 
+   public String getOrderdescription() {
+      return orderdescription;
+   }
+
+   public void setOrderdescription(String orderdescription) {
+      this.orderdescription = orderdescription;
+   }
+
    @Override
    public String toString() {
       return "Order{" +
               "ordnum=" + ordnum +
               ", ordamount=" + ordamount +
               ", advanceamount=" + advanceamount +
+              ", customer=" + customer +
               ", orderdescription='" + orderdescription + '\'' +
               ", payments=" + payments +
-              ", customer=" + customer +
               '}';
    }
 }
