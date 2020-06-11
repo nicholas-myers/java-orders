@@ -31,4 +31,12 @@ public class CustomerController {
       return new ResponseEntity<>(c, HttpStatus.OK);
    }
 
+   @GetMapping(value = "/customers/namelike/{custname}",
+   produces = {"application/json"})
+   public ResponseEntity<?> findCustomerByNameLike(@PathVariable String custname)
+   {
+      List<Customer> matchList = customerService.findCustomerByNameLike(custname);
+      return new ResponseEntity<>(matchList, HttpStatus.OK);
+   }
+
 }
