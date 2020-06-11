@@ -10,20 +10,20 @@ public class Order
 {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   private long ordernumber;
+   private long ordnum;
 
    @Column(nullable = false)
-   private double orderamount;
+   private double ordamount;
    private double advanceamount;
    private String orderdescription;
 
-   @ManyToOne
-   @JoinColumn(name = "customercode", nullable = false)
-   private Customer customer;
-
    @ManyToMany()
    @JoinTable(name = "orderpayments",
-   joinColumns = @JoinColumn(name = "ordernumber"),
+   joinColumns = @JoinColumn(name = "ordnum"),
    inverseJoinColumns = @JoinColumn(name = "paymentid"))
    private List<Payment> payments = new ArrayList<>();
+
+   @ManyToOne
+   @JoinColumn(name = "custcode", nullable = false)
+   private Customer customer;
 }

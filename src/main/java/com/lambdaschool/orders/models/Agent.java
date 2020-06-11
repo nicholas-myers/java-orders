@@ -14,11 +14,10 @@ public class Agent
 
    @Column(nullable = false)
    private String agentname;
-
-   private double commission;
-   private String country;
-   private int phone;
    private String workingarea;
+   private double commission;
+   private int phone;
+   private String country;
 
    @OneToMany(mappedBy = "agent",
    cascade = CascadeType.ALL,

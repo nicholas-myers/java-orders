@@ -8,5 +8,7 @@ public interface CustomerService
 {
    List<Customer> findAllCustomers();
 
-   Customer findCustomerById(long id);
+   Customer findCustomerByCode(long custcode);
+
+   List<Customer> findCustomerByNameLike(String customername);
 }
