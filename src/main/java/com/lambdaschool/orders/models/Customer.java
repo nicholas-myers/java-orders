@@ -10,19 +10,19 @@ public class Customer
 {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   private long customercode;
+   private long custcode;
 
    @Column(nullable = false)
-   private String customername;
+   private String custname;
 
-   private String customercity;
-   private String customerworkingarea;
-   private String customercountry;
+   private String custcity;
+   private String workingarea;
+   private String custcountry;
    private String grade;
-   private double openingamount;
-   private double receiveamount;
-   private double paymentamount;
-   private double outstandingamount;
+   private double openingamt;
+   private double receiveamt;
+   private double paymentamt;
+   private double outstandingamt;
    private String phone;
 
    @ManyToOne

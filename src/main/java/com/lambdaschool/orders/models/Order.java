@@ -21,6 +21,9 @@ public class Order
    @JoinColumn(name = "customercode", nullable = false)
    private Customer customer;
 
-   @ManyToMany
-   List<Payment> orderpayments = new ArrayList<>();
+   @ManyToMany()
+   @JoinTable(name = "orderpayments",
+   joinColumns = @JoinColumn(name = "ordernumber"),
+   inverseJoinColumns = @JoinColumn(name = "paymentid"))
+   private List<Payment> payments = new ArrayList<>();
 }

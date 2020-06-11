@@ -1,6 +1,10 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Payment
 {
@@ -10,6 +14,7 @@ public class Payment
    @Column(nullable = false, unique = true)
    private String type;
 
-   @ManyToMany
-   @JoinTable
+   @ManyToMany(mappedBy = "payments")
+   @JsonIgnoreProperties(value = "payments")
+   List<Order> orders = new ArrayList<>();
 }
